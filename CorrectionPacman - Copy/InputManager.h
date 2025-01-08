@@ -46,7 +46,8 @@ class InputManager : public Singleton<InputManager>
 public:
 
 	void ConsumeInput(RenderWindow& _window);
-	void BindAction(const vector<Code>& _codes, const function<void()>& _callback);
+	void BindAction(const function<void()>& _callback, const Code& _code);
+	void BindAction(const function<void()>& _callback, const vector<Code>& _codes = {});
 
 private:
 	void CloseWindow(RenderWindow& _window);

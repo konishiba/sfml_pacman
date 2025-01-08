@@ -2,23 +2,26 @@
 #include "TextureManager.h"
 #include "Object.h"
 #include "Level.h"
+#include "CollisionComponent.h"
 
 class Entity : public Object
 {
-protected:
-	Level* level;
 	Vector2f shapeSize;
-	RectangleShape* shape;
+	CollisionComponent* collision;
+
+protected:
 	Texture texture;
+	RectangleShape shape;
+	Level* level;
 
 public:
 	inline void SetPosition(const Vector2f& _coords)
 	{
 
-		shape->setPosition(_coords);
+		shape.setPosition(_coords);
 	}
 
-	inline RectangleShape* GetShape() const
+	inline RectangleShape& GetShape()
 	{
 		return shape;
 	}
@@ -28,21 +31,27 @@ public:
 	}
 	inline Vector2f GetPosition() const
 	{
-		return shape->getPosition();
+		return shape.getPosition();
 	}
 	inline Level* GetLevel() const
 	{
 		return level;
 	}
+	inline CollisionComponent* GetCollision() const
+	{
+		return collision;
+	}
 
-	Entity(const string& _name, Vector2f _shapeSize);
+	Entity(Level* _level, const string& _name, const Vector2f& _shapeSize,
+			const CollisionType& _type = CT_BLOCK, const function<void(Entity* _entity)>& _callback = {});
 
 	~Entity();
 
 public:
 	virtual void Update() override;
 
-	virtual void UpdateMoveAnimation() = 0;
+	virtual void UpdateMoveAnimation();
+	virtual void DeadAnimation();
 
 
 };

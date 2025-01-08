@@ -4,8 +4,15 @@
 class Object
 {
 public:
-	void Start();
+
+	virtual void Start();
 	virtual void Update();
-	void Stop();
+	virtual void Stop();
+
+	template <typename Type>
+	Type* Cast(Object* _object)
+	{
+		return dynamic_cast<Type*>(_object);
+	}
 };
 

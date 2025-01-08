@@ -13,14 +13,19 @@ void InputManager::ConsumeInput(RenderWindow& _window)
         {
             for (InputData& _inputData : inputsData)
             {
-                _inputData.TryToExecute(_key);
+               if( _inputData.TryToExecute(_key)) break;
             }
 
         }
     }
 }
 
-void InputManager::BindAction(const vector<Code>& _codes, const function<void()>& _callback)
+void InputManager::BindAction(const function<void()>& _callback, const Code& _code)
+{
+    inputsData.push_back(InputData(_callback, { _code }));
+}
+
+void InputManager::BindAction(const function<void()>& _callback, const vector<Code>& _codes)
 {
     inputsData.push_back(InputData(_callback, _codes, _codes.empty()));
 }

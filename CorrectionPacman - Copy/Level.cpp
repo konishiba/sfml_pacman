@@ -1,11 +1,14 @@
 #include "Level.h"
-
+#include "FileLoader.h"
+#include "PacMan.h"
+#include "Food.h"
 
 Level::Level(const string& _name, RenderWindow* _window)
 {
-	name = _name;
+    name = _name;
     prefixPath = "Assets/Maps/";
     window = _window;
+    points = 0;
     Generate();
 }
 
@@ -13,22 +16,7 @@ Level::~Level()
 {
     for (Entity* _entity : entities)
     {
-        if (PacMan* _pacMan = dynamic_cast<PacMan*>(_entity))
-        {
-            delete _pacMan;
-        }
-        else if (Wall* _wall = dynamic_cast<Wall*>(_entity))
-        {
-            delete _wall;
-        }
-        else if (Food* _food = dynamic_cast<Food*>(_entity))
-        {
-            delete _food;
-        }
-        else if (Ghost* _ghost = dynamic_cast<Ghost*>(_entity))
-        {
-            delete _ghost;
-        }
+        delete _entity;
     }
 }
 
@@ -39,6 +27,21 @@ void Level::Update()
         _entity->Update();
     }
     Display();
+}
+
+Entity* Level::CheckCollision(const Vector2f& _targetPosition)
+{
+    for (Entity* _entity : entities)
+    {
+        if (_entity->GetPosition() == _targetPosition) return _entity;
+    }
+
+    return nullptr;
+}
+
+void Level::AddScore(const int _points)
+{
+    points += _points;
 }
 
 void Level::Generate()
@@ -75,19 +78,19 @@ void Level::SpawnEntity(const char& _symbol, const Vector2f _coords, Vector2f& _
     map<char, function<Entity* ()>> _textureDatabase =
     {
         {'#', [&]() {
-            return new Wall("Walls/Wall", _shapeSize);
+            return new Entity(this, "Walls/Wall", _shapeSize, CT_BLOCK);
         }},
         { '.', [&]() {
-            return new Food("Foods/Point" , _shapeSize);
+            return new Food(this,"Foods/Point" , _shapeSize, FT_EATABLE, 10);
         }},
         { '*', [&]() {
-            return new Food("Foods/Apple" , _shapeSize);
+            return new Food(this,"Foods/Apple" , _shapeSize,  FT_EATABLE, 100);
         }},
         { 'C',  [&]() {
-            return new PacMan("Pacman/Moving/PacMan_Eating" , _shapeSize);
+            return new PacMan(this, _shapeSize);
         }},
         { 'G', [&]() {
-            return new Ghost("Ghosts/Blue/BlueGhost_Vulnerable" , _shapeSize);
+            return new Food(this,"Ghosts/Blue/BlueGhost_Vulnerable" , _shapeSize, FT_EATABLE, 1000);
         }}
     };
 
@@ -105,18 +108,10 @@ void Level::PlaceEntity(Vector2i _coords, Vector2f& _shapeSize, Entity* _entity)
 
 void Level::Display() const
 {
-    for (const Entity* _entity : entities)
+    for (Entity* _entity : entities)
     {
-        window->draw(*_entity->GetShape());
+        window->draw(_entity->GetShape());
     }
 }
 
-Entity* Level::checkCollision(const Vector2f& _targetPosition)
-{
-    for (Entity* _entity : entities)
-    {
-        if()
-    }
-    return nullptr;
-}
 

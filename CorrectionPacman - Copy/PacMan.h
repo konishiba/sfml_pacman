@@ -10,22 +10,21 @@ class PacMan : public Entity
 	LifeComponent* life;
 
 public:
-	MovementComponent* GetMovementComponent()const
+	inline MovementComponent* GetMovementComponent()const
 	{
 		return movement;
 	}
 
 public:
-	PacMan(const string& _name, const Vector2f& _shapeSize);
+	PacMan(Level* _level, const Vector2f& _shapeSize);
 	~PacMan();
 
 public:
-	virtual void UpdateMoveAnimation() override;
-
 	virtual void Update() override;
-
+	void AddPoint(const int _points);
 private:
 	void SetupInput();
-
+	virtual void UpdateMoveAnimation() override;
+	virtual void DeadAnimation() override;
 
 };

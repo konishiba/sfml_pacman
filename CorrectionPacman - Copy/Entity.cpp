@@ -1,19 +1,29 @@
 #include "Entity.h"
 
 
-Entity::Entity(const string& _name, Vector2f _shapeSize)
+Entity::Entity(Level* _level, const string& _name, const Vector2f& _shapeSize,
+	const CollisionType& _type, const function<void(Entity* _entity)>& _callback)
 {
+	level = _level;
 	shapeSize = _shapeSize;
-	shape = new RectangleShape(shapeSize);
-	TextureManager::GetInstance().InitShape(*shape, texture,_name);
-	shape->setOrigin({ shapeSize.x / 2 , shapeSize.y / 2});
+	shape = RectangleShape(shapeSize);
+	shape.setOrigin(_shapeSize / 2.0f);
+	TextureManager::GetInstance().InitShape(shape, texture, _name);
+	collision = new CollisionComponent(_type, _callback, this);
 }
 
 Entity::~Entity()
 {
-	delete shape;
 }
 
 void Entity::Update()
+{
+}
+
+void Entity::UpdateMoveAnimation()
+{
+}
+
+void Entity::DeadAnimation()
 {
 }

@@ -1,10 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FileLoader.h"
-#include "PacMan.h"
-#include "Food.h"
-#include "Ghost.h"
-#include "Wall.h"
+
+class PacMan;
+class Entity;
 
 class Level
 {
@@ -13,6 +11,8 @@ class Level
 	vector<Entity*> entities;
 	Vector2u mapSize;
 	RenderWindow* window;
+	int points;
+
 public:
 
 	inline Vector2u GetMapSize() const
@@ -27,6 +27,9 @@ public:
 
 public:
 	void Update();
+	Entity* CheckCollision(const Vector2f& _targetPosition);
+	void AddScore(const int _points);
+
 private:
 	void Generate();
 	void SpawnEntity(const char& _symbol, const Vector2f _coords, Vector2f& _shapeSize);
@@ -34,6 +37,5 @@ private:
 	void Display() const;
 
 public:
-	Entity* CheckCollision(const Vector2f& _targetPosition);
 };
 

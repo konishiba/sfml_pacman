@@ -1,4 +1,5 @@
 #pragma once
+#include "CoreMinimal.h"
 #include "Component.h"
 
 class MovementComponent : public Component
@@ -8,7 +9,7 @@ class MovementComponent : public Component
 	Vector2i direction;
 
 public:
-	inline void ToggoleMoveStatus()
+	inline void ToggleMoveStatus()
 	{
 		canMove = !canMove;
 	}
@@ -31,8 +32,6 @@ public:
 
 	void Move();
 public:
-
-	void Rotate(float _radians);
 
 	void Rotate(const Vector2i& _direction);
 

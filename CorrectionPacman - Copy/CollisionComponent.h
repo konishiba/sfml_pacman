@@ -1,22 +1,22 @@
 #pragma once
 #include "Component.h"
 
-enum SolidType
+enum CollisionType
 {
-	ST_BLOCK,
-	ST_OVERLAP,
-	ST_NONE,
+	CT_NONE,
+	CT_OVERLAP,
+	CT_BLOCK,
 
-	ST_COUNT
+	CT_COUNT
 };
 
 class CollisionComponent : public Component
 {
-	SolidType solid;
-public:
-	CollisionComponent(Entity* _owner, SolidType _solid);
+	CollisionType type;
+	function<void(Entity* _entity)> callback;
 
 public:
-	void Colide(const function<void()>& _callback);
+	CollisionComponent(const CollisionType& _type, const function<void(Entity* _entity)>& _callback, Entity* _owner);
+public:
+	bool Collide(Entity* _entity);
 };
-
