@@ -138,11 +138,13 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationCompenent.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="Food.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LifeComponent.cpp" />
@@ -154,12 +156,14 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"</Command>
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationCompenent.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FileLoader.h" />
     <ClInclude Include="Food.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LifeComponent.h" />

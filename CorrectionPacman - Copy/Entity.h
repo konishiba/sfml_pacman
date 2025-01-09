@@ -25,6 +25,10 @@ public:
 	{
 		return shape;
 	}
+	inline RectangleShape* GetShapePtr()
+	{
+		return &shape;
+	}
 	inline Vector2f GetShapeSize() const
 	{
 		return shapeSize;
@@ -41,6 +45,10 @@ public:
 	{
 		return collision;
 	}
+	inline Texture& GetTexture() 
+	{
+		return texture;
+	}
 
 	Entity(Level* _level, const string& _name, const Vector2f& _shapeSize,
 			const CollisionType& _type = CT_BLOCK, const function<void(Entity* _entity)>& _callback = {});
@@ -49,8 +57,6 @@ public:
 
 public:
 	virtual void Update() override;
-
-	virtual void UpdateMoveAnimation();
 	virtual void DeadAnimation();
 
 

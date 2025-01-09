@@ -14,15 +14,13 @@ Entity::Entity(Level* _level, const string& _name, const Vector2f& _shapeSize,
 
 Entity::~Entity()
 {
+	delete collision;
 }
 
 void Entity::Update()
 {
 }
 
-void Entity::UpdateMoveAnimation()
-{
-}
 
 void Entity::DeadAnimation()
 {

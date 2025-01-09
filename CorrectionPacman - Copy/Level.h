@@ -22,13 +22,13 @@ public:
 
 
 public:
+	Level() = default;
 	Level(const string& _name, RenderWindow* _window);
 	~Level();
 
 public:
 	void Update();
 	Entity* CheckCollision(const Vector2f& _targetPosition);
-	void AddScore(const int _points);
 
 private:
 	void Generate();

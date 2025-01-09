@@ -5,6 +5,7 @@ LifeComponent::LifeComponent(Entity* _owner) : Component(_owner)
 	ResetLife();
 }
 
+
 void LifeComponent::RemoveLife()
 {
 	lifesCount--;

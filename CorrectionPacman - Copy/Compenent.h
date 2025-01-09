@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 
-class Compenent
+class Compenent : public Object
 {
 protected:
 	Entity* owner;
@@ -14,5 +14,6 @@ public:
 
 public:
 	Compenent(Entity* _owner);
+
 };
 

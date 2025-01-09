@@ -13,6 +13,10 @@ public:
 	{
 		canMove = !canMove;
 	}
+	inline void SetMoveStatus(bool _status)
+	{
+		canMove = _status;
+	}
 
 	inline void SetDirection(const Vector2i& _newDirection)
 	{

@@ -3,16 +3,22 @@
 #include "Entity.h"
 #include "MovementComponent.h"
 #include "LifeComponent.h"
+#include "AnimationCompenent.h"
 
 class PacMan : public Entity
 {
 	MovementComponent* movement;
 	LifeComponent* life;
+	AnimationCompenent* animation;
 
 public:
 	inline MovementComponent* GetMovementComponent()const
 	{
 		return movement;
+	}
+	inline LifeComponent* GetLifeComponent() const
+	{
+		return life;
 	}
 
 public:
@@ -21,10 +27,7 @@ public:
 
 public:
 	virtual void Update() override;
-	void AddPoint(const int _points);
 private:
 	void SetupInput();
-	virtual void UpdateMoveAnimation() override;
-	virtual void DeadAnimation() override;
 
 };

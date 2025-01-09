@@ -4,6 +4,7 @@
 #include "Level.h"
 #include "InputManager.h"
 #include "Object.h"
+#include "Game.h"
 
 #define MAP_SIZE_X 28
 #define MAP_SIZE_Y 12
@@ -13,20 +14,7 @@ int main()
 {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    RenderWindow _window(VideoMode(Vector2u(MAP_SIZE_X * TILE_SIZE, MAP_SIZE_Y * TILE_SIZE)), "pacman");
-    Level _level = Level("SmallMap", &_window);
-
-
-
-    while (_window.isOpen())
-    {
-        InputManager::GetInstance().ConsumeInput(_window);
-
-        _window.clear();
-        _level.Update();
-        _window.display();
-        SLEEP(200ms);
-    }
+    Game::GetInstance().Launch("SmallMap");
 
     return 0;
 }

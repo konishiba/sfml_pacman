@@ -10,7 +10,12 @@ MovementComponent::MovementComponent(Entity* _owner) : Component(_owner)
 
 void MovementComponent::Update()
 {
+	//debug
+	string _debug = canMove == 0 ? "false" : "true";
+	cout << _debug << endl;
+	//debug
 	Move();
+	TextureManager::GetInstance().UpdateTexture(owner->GetShape(), owner->GetTexture());
 }
 
 void MovementComponent::Move()
@@ -26,7 +31,6 @@ void MovementComponent::Move()
 		if (!_entity || _entity->GetCollision()->Collide(owner))
 		{
 			owner->GetShape().setPosition(_destination);
-			owner->UpdateMoveAnimation();
 		}
 	}
 }

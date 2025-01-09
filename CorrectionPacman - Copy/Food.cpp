@@ -11,7 +11,7 @@ void Food::Eat(Entity* _entity)
 {
 	if (PacMan* _pacMan = Cast<PacMan>(_entity))
 	{
-		_pacMan->AddPoint(points);
+		//_pacMan->AddPoint(points);
 		shape.setScale(Vector2f());
 		type = FT_COUNT;
 	}

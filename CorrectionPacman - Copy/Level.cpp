@@ -16,7 +16,18 @@ Level::~Level()
 {
     for (Entity* _entity : entities)
     {
-        delete _entity;
+        if (PacMan* _pacMan = _entity->Cast<PacMan>(_entity))
+        {
+            delete _pacMan;
+        }
+        else if (Food* _food = _entity->Cast<Food>(_entity))
+        {
+            delete _food;
+        }
+        else
+        {
+            delete _entity;
+        }
     }
 }
 
@@ -37,11 +48,6 @@ Entity* Level::CheckCollision(const Vector2f& _targetPosition)
     }
 
     return nullptr;
-}
-
-void Level::AddScore(const int _points)
-{
-    points += _points;
 }
 
 void Level::Generate()
